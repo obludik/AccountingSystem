@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: development
+amazon:
+  dynamodb:
+    endpoint: http://localhost:8046/
+    startLocalDB: true
+    localDBPort: 8046
+  aws:
+    accessKey: accessKey
+    secretKey: secretKey
+server:
+  port: 8045
+nativeLibs:
+  path: native-libs
+---
+spring:
+  profiles: docker
+amazon:
+  dynamodb:
+    endpoint: http://localhost:8046/
+    startLocalDB: true
+    localDBPort: 8046
+  aws:
+    accessKey: accessKey
+    secretKey: secretKey
+server:
+  port: 8045
+nativeLibs:
+  path: /app/native-libs
+
