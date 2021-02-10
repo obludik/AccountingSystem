@@ -375,23 +375,20 @@ In better format:
 
 The project uses Maven build tool. It can be build by running "mvn package" (if the Maven is installed).
 
-## Runnable jar
+## Docker 
 
-You can unpack zip with runnable version and run it from the command line:
+The application includes Dockerfile for docker configuration.
+After Maven build you can create docker image and run it with use of run_docker.sh script.
+It includes build, remove old container and start of new one:
 
-java -jar AccountingSystem-1.0.jar
+docker build -t accountingsystem .
+docker stop accountingsystem
+docker rm accountingsystem
+docker run -p 8045:8045 --name accountingsystem accountingsystem
 
-It is needed to use Java 13 version or higher. You can specify the location of Java with running the following command from the command line (change the path):
-
-"C:\Program Files\Java\jdk-13.0.2\bin\java" -jar AccountingSystem-1.0.jar
-
-You can send request to REST interface using any REST client (e.g. curl).
-
-You can try:
+You can try now:
 
 curl http://localhost:8045/invoices/customer2/ref-2054558
-
-Note: Spring plugin generates runnable jar with all dependent libraries during the build with "mvn package". But there are some native-libs (dll, so) for sqlite4java-1.0.392.jar library which is used by DynamoDB. I was not able to make the library load these native libraries from created jar file. So the native libraries are outside jar in the directory native-libs with library sqlite4java-1.0.392.jar in libs directory. And I added link to them in the jar MANIFEST.MF file ("Class-Path: libs/sqlite4java-1.0.392.jar").
 
 ## What is missing in the application
 
